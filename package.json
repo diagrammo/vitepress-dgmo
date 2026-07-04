@@ -62,14 +62,14 @@
     "prepublishOnly": "pnpm build && pnpm test"
   },
   "peerDependencies": {
-    "@diagrammo/dgmo": "^0.39.0",
+    "@diagrammo/dgmo": "^0.44.0",
     "vitepress": "^1.0.0"
   },
   "dependencies": {
     "remark-dgmo": "^0.4.0"
   },
   "devDependencies": {
-    "@diagrammo/dgmo": "^0.39.0",
+    "@diagrammo/dgmo": "^0.44.0",
     "@eslint/js": "^10.0.1",
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^22.10.0",
