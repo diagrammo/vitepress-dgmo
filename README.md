@@ -2,6 +2,8 @@
 
 Render [Diagrammo](https://diagrammo.app) (DGMO) diagrams from fenced `dgmo` code blocks in your [VitePress](https://vitepress.dev) docs — at build time, as inline SVG. No client-side rendering, no runtime diagram library shipped to readers.
 
+🔭 **Live showcase:** [every chart type rendered through vitepress-dgmo](https://diagrammo.github.io/vitepress-dgmo/) — every block is in showcase mode, so hovering a diagram reveals its copy / open-in-editor footer.
+
 ````md
 ```dgmo
 flowchart
