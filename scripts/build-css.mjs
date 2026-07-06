@@ -11,6 +11,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { adaptClientCssToClassToggle } from 'remark-dgmo/client-css';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
@@ -20,10 +21,11 @@ const require = createRequire(import.meta.url);
 const sourcePath = require.resolve('remark-dgmo/client.css');
 const source = readFileSync(sourcePath, 'utf8');
 
-// The single transform: `[data-theme="dark"]` → `html.dark`.
-// Literal-string replace (not regex) since the bracket characters would need
-// escaping; the substring is unique in client.css.
-const adapted = source.split('[data-theme="dark"]').join('html.dark');
+// The single transform: `[data-theme="dark"]` → `html.dark`. Delegates to the
+// shared `adaptClientCssToClassToggle` helper from remark-dgmo/client-css
+// (default toggleSelector `html.dark`) so the rewrite stays in sync with the
+// other host integrations instead of being hand-copied here.
+const adapted = adaptClientCssToClassToggle(source);
 
 const banner =
   `/* vitepress-dgmo/client.css\n` +
