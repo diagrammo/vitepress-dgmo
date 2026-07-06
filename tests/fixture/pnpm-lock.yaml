@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@diagrammo/dgmo':
-        specifier: ^0.47.0
-        version: 0.47.0
+        specifier: ^0.48.1
+        version: 0.48.1
       vitepress:
         specifier: ^1.6.4
         version: 1.6.4(@algolia/client-search@5.55.1)(postcss@8.5.16)(search-insights@2.17.3)
@@ -174,8 +174,8 @@ packages:
   '@dagrejs/graphlib@4.0.1':
     resolution: {integrity: sha512-IvcV6FduIIAmLwnH+yun+QtV36SC7mERqa86aClNqmMN09WhmPPYU8ckHrZBozErf+UvHPWOTJYaGYiIcs0DgA==}
 
-  '@diagrammo/dgmo@0.47.0':
-    resolution: {integrity: sha512-0bK1TcFy2KfCuUwNds1haVlx4qkECibsBxkPzX68tVid0KHGinLedRpXIjaMcGRyf47v/GnPELRUeRFrwalH9A==}
+  '@diagrammo/dgmo@0.48.1':
+    resolution: {integrity: sha512-WnvGgm5lhFuBEWldoxEaybMCSNmV3TKdQx8oo2ik4sg+lSMMZoY1bN3FAftRbkgiMFMWVxsCD/ObLZbtieV1FA==}
     engines: {node: '>=20.6'}
     hasBin: true
     peerDependencies:
@@ -1321,7 +1321,7 @@ snapshots:
 
   '@dagrejs/graphlib@4.0.1': {}
 
-  '@diagrammo/dgmo@0.47.0':
+  '@diagrammo/dgmo@0.48.1':
     dependencies:
       '@dagrejs/dagre': 3.0.0
       '@resvg/resvg-js': 2.6.2
