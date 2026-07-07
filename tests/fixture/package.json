@@ -13,6 +13,9 @@
     "vitepress": "^1.6.4",
     "vitepress-dgmo": "link:../.."
   },
+  "devDependencies": {
+    "@mdit-vue/shared": "^3.0.2"
+  },
   "engines": {
     "node": ">=20.6"
   }
