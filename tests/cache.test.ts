@@ -1,5 +1,9 @@
 import { describe, it, expect, vi } from 'vitest';
-import { createDgmoCache, type RenderFn } from '../src/cache.js';
+import {
+  createDgmoCache,
+  neutralizeBakedStyles,
+  type RenderFn,
+} from '../src/cache.js';
 
 const stub: RenderFn = (source, meta) =>
   Promise.resolve({
@@ -82,5 +86,47 @@ describe('createDgmoCache', () => {
     await cache.warm('bad', null);
     const html = cache.get('bad', null)!;
     expect(html).toContain('class="foo legacy foo--error"');
+  });
+
+  it('neutralizes inline <style> in warmed HTML so Vue keeps the geometry', async () => {
+    // A baked-hover SVG: inline <style> followed by geometry that Vue would
+    // otherwise drop during hydration.
+    const bakedHover: RenderFn = () =>
+      Promise.resolve({
+        html:
+          '<div class="dgmo-light"><svg viewBox="0 0 10 10">' +
+          '<style>[data-branch]:hover{filter:saturate(1.4)}</style>' +
+          '<rect/><g transform="translate(0, 40)"><line/></g></svg></div>',
+        diagnostics: [],
+      });
+    const cache = createDgmoCache({}, bakedHover);
+    await cache.warm('vc', null);
+    const html = cache.get('vc', null)!;
+    expect(html).not.toContain('<style>');
+    expect(html).toContain('<desc class="dgmo-baked-css">');
+    // CSS text preserved, geometry untouched.
+    expect(html).toContain('[data-branch]:hover{filter:saturate(1.4)}');
+    expect(html).toContain('<g transform="translate(0, 40)">');
+  });
+});
+
+describe('neutralizeBakedStyles', () => {
+  it('rewrites a bare inline <style> to an inert <desc>', () => {
+    expect(neutralizeBakedStyles('<svg><style>a{color:red}</style></svg>')).toBe(
+      '<svg><desc class="dgmo-baked-css">a{color:red}</desc></svg>'
+    );
+  });
+
+  it('handles multiple <style> blocks (dual light/dark render)', () => {
+    const out = neutralizeBakedStyles(
+      '<svg><style>x{}</style></svg><svg><style>y{}</style></svg>'
+    );
+    expect(out).not.toContain('<style>');
+    expect((out.match(/dgmo-baked-css/g) ?? []).length).toBe(2);
+  });
+
+  it('leaves HTML without inline <style> untouched', () => {
+    const html = '<div class="dgmo"><svg><rect/></svg></div>';
+    expect(neutralizeBakedStyles(html)).toBe(html);
   });
 });

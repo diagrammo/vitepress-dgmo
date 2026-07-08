@@ -17,6 +17,31 @@ import { bindDgmo } from 'remark-dgmo/client.js';
 
 export { bindDgmo };
 
+const SVG_NS = 'http://www.w3.org/2000/svg';
+
+/**
+ * Re-promote the inert `<desc class="dgmo-baked-css">` placeholders that the
+ * warm-cache step swapped in for each SVG's baked hover `<style>` (see
+ * `neutralizeBakedStyles` in ./cache.ts). We move the CSS back into a real
+ * `<style>` element so the no-JS hover interactivity works again.
+ *
+ * Runs after hydration, so mutating the (v-pre, static) island is safe — Vue
+ * will not re-diff it. Idempotent: each `<desc>` is consumed and removed, so a
+ * second pass (SPA route change) finds nothing to do.
+ */
+function promoteBakedStyles(): void {
+  if (typeof document === 'undefined') return;
+  document.querySelectorAll('desc.dgmo-baked-css').forEach((desc) => {
+    const svg = desc.closest('svg');
+    if (svg) {
+      const style = document.createElementNS(SVG_NS, 'style');
+      style.textContent = desc.textContent ?? '';
+      svg.insertBefore(style, svg.firstChild);
+    }
+    desc.remove();
+  });
+}
+
 /** Minimal structural mirror of VitePress's client `Router`. */
 interface VitePressRouter {
   onAfterRouteChanged?: (to: string) => void;
@@ -44,7 +69,9 @@ interface VitePressRouter {
  * change (VitePress SPA navigation does not refire `DOMContentLoaded`).
  */
 export function setupDgmo(router: VitePressRouter): void {
-  // Initial paint (no-op during SSR).
+  // Initial paint (no-op during SSR). Promote baked-hover CSS first so the
+  // `<style>` is in place before bindDgmo measures/tightens the SVG.
+  promoteBakedStyles();
   bindDgmo();
 
   const previous = router.onAfterRouteChanged;
@@ -53,8 +80,12 @@ export function setupDgmo(router: VitePressRouter): void {
     // Defer to the next frame so the freshly-navigated DOM is in place before
     // we measure/tighten SVGs.
     if (typeof requestAnimationFrame === 'function') {
-      requestAnimationFrame(() => bindDgmo());
+      requestAnimationFrame(() => {
+        promoteBakedStyles();
+        bindDgmo();
+      });
     } else {
+      promoteBakedStyles();
       bindDgmo();
     }
   };
