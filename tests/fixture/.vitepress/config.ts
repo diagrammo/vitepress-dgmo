@@ -67,7 +67,11 @@ export default defineConfig(
     {
       base,
       lang: 'en-US',
-      title: 'vitepress-dgmo',
+      title: 'Diagrammo × VitePress',
+      head: [
+        ['link', { rel: 'icon', type: 'image/svg+xml', href: `${base}favicon.svg` }],
+        ['link', { rel: 'alternate icon', href: `${base}favicon.ico`, sizes: 'any' }],
+      ],
       description:
         'Render Diagrammo (DGMO) diagrams from fenced ```dgmo code blocks in VitePress — at build time, as inline SVG.',
       cleanUrls: true,
