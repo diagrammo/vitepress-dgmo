@@ -1,5 +1,6 @@
 ---
-title: All Chart Types
+title: Diagrammo × VitePress
+titleTemplate: false
 description: Every DGMO diagram type, rendered at build time by vitepress-dgmo.
 ---
 
