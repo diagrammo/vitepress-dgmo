@@ -9,7 +9,7 @@
     "docs:preview": "vitepress preview"
   },
   "dependencies": {
-    "@diagrammo/dgmo": "^0.49.0",
+    "@diagrammo/dgmo": ">=0.50.0 <1",
     "vitepress": "^1.6.4",
     "vitepress-dgmo": "link:../.."
   },
