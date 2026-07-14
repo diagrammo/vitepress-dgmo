@@ -1,6 +1,6 @@
 {
   "name": "vitepress-dgmo",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "VitePress integration to render DGMO diagrams from fenced code blocks at build time. A markdown-it fence override backed by an async pre-render cache — `withDgmo()` wires both into your .vitepress/config.ts in one call.",
   "license": "MIT",
   "repository": {
@@ -66,8 +66,8 @@
     "vitepress": "^1.0.0"
   },
   "dependencies": {
-    "remark-dgmo": "^0.8.0",
-    "@diagrammo/dgmo": "^0.50.2"
+    "remark-dgmo": "^0.9.0",
+    "@diagrammo/dgmo": "^0.51.0"
   },
   "devDependencies": {
     "@diagrammo/dgmo": ">=0.50.0 <1",
