@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@diagrammo/dgmo':
-        specifier: ^0.52.0
-        version: 0.52.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)
+        specifier: ^0.53.0
+        version: 0.53.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)
       remark-dgmo:
-        specifier: ^0.9.0
-        version: 0.9.0(@diagrammo/dgmo@0.52.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10))
+        specifier: ^0.10.0
+        version: 0.10.0(@diagrammo/dgmo@0.53.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10))
       vitepress:
         specifier: ^1.0.0
         version: 1.6.4(@algolia/client-search@5.55.1)(@types/node@22.20.0)(postcss@8.5.16)(search-insights@2.17.3)(typescript@6.0.3)
@@ -215,8 +215,8 @@ packages:
   '@dagrejs/graphlib@4.0.1':
     resolution: {integrity: sha512-IvcV6FduIIAmLwnH+yun+QtV36SC7mERqa86aClNqmMN09WhmPPYU8ckHrZBozErf+UvHPWOTJYaGYiIcs0DgA==}
 
-  '@diagrammo/dgmo@0.52.0':
-    resolution: {integrity: sha512-nmsEt0yZCxbdJK2OCrvLitc/OwwtQ+9PrL/CMYsna+tHaENAapm3GqXkDTehUaNTQQ0MuoRc3Q2U8s93Lo+xxg==}
+  '@diagrammo/dgmo@0.53.0':
+    resolution: {integrity: sha512-SZdkpkoMaiYCJB1OpxNGp1hoC1WAhC8dVKpk3/Ve8E733V8MOSqdyrIG4pv2oHaDCljDRLbStEhnf098fNm3rg==}
     engines: {node: '>=20.6'}
     hasBin: true
     peerDependencies:
@@ -1901,8 +1901,8 @@ packages:
   regex@6.1.0:
     resolution: {integrity: sha512-6VwtthbV4o/7+OaAF9I5L5V3llLEsoPyq9P1JVXkedTP33c7MfCG0/5NOPcSJn0TzXcG9YUrR0gQSWioew3LDg==}
 
-  remark-dgmo@0.9.0:
-    resolution: {integrity: sha512-wnH7F7PUt6Bs2wN7iMX8e4Nd2VxREzBxpcY2lul50sYiqU4Lv74pjvFZ6NXz5qEah9Ss3Cy6vV9XBVkEcC2uOA==}
+  remark-dgmo@0.10.0:
+    resolution: {integrity: sha512-W8UP3G50xkexh4xLBlIwBV12iSzevKeAy8e9/8R/ykfsfza3VNhBDwS0rDXfadP+swQ54WEisGmyiMzbqbqNAg==}
     engines: {node: '>=20.6'}
     peerDependencies:
       '@diagrammo/dgmo': '>=0.45.0 <1'
@@ -2483,7 +2483,7 @@ snapshots:
 
   '@dagrejs/graphlib@4.0.1': {}
 
-  '@diagrammo/dgmo@0.52.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)':
+  '@diagrammo/dgmo@0.53.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)':
     dependencies:
       '@dagrejs/dagre': 3.0.0
       '@resvg/resvg-js': 2.6.2
@@ -3980,9 +3980,9 @@ snapshots:
     dependencies:
       regex-utilities: 2.3.0
 
-  remark-dgmo@0.9.0(@diagrammo/dgmo@0.52.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)):
+  remark-dgmo@0.10.0(@diagrammo/dgmo@0.53.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)):
     dependencies:
-      '@diagrammo/dgmo': 0.52.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)
+      '@diagrammo/dgmo': 0.53.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
       '@lezer/lr': 1.4.10
