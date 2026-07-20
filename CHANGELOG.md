@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0
+
+Bundled `@diagrammo/dgmo` bumped to `^0.54.0` — sankey emphasis directives (`highlight`/`dim`), working infra `default-rps`, a lighter `./completion` subpath, swimlane edge completions, consistent thousands separators, the infra async 2× downstream-load fix, surplus-value warnings, and the body `fill-tint` contrast fix. All legacy spellings still parse; no source changes required.
+
 ## 0.3.0
 
 Bundled `@diagrammo/dgmo` bumped to `^0.53.0` and `remark-dgmo` to `^0.10.0` — language-consistency pass (decision #48). Embed toolbar moved from the diagram's top-right to bottom-right so it no longer collides with host chrome. All legacy spellings still parse; no source changes required.
