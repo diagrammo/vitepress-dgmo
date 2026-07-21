@@ -32,22 +32,30 @@
 </template>
 
 <style>
+/* Reserve a 48px strip at the very top: VitePress offsets its fixed nav, the
+   sidebar, and the content by --vp-layout-top-height, so a fixed banner of the
+   same height slots in cleanly with no overlap and no scroll-off. */
+:root {
+  --vp-layout-top-height: 48px;
+}
 .dgmo-embed-banner {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   box-sizing: border-box;
-  width: 100%;
-  margin: 0;
-  padding: 0.5rem clamp(0.75rem, 3vw, 1.25rem);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--vp-layout-top-height);
+  padding: 0 clamp(0.75rem, 3vw, 1.25rem);
   background: linear-gradient(90deg, #27333f 0%, #1c242e 100%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: inset 0 2px 0 #3a9188;
   color: #e6edf3;
   font: 500 0.875rem/1.3 system-ui, -apple-system, 'Segoe UI', sans-serif;
   text-decoration: none;
-  position: relative;
-  z-index: 50;
+  z-index: 100;
 }
 .dgmo-embed-banner:hover .dgmo-embed-banner__cta {
   background: rgba(255, 255, 255, 0.2);
@@ -74,6 +82,9 @@
   color: #aeb9c4;
   flex: 1 1 auto;
   min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .dgmo-embed-banner__cta {
   flex-shrink: 0;
