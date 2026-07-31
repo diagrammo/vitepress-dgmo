@@ -62,12 +62,12 @@
     "prepublishOnly": "pnpm build && pnpm test"
   },
   "peerDependencies": {
-    "@diagrammo/dgmo": ">=0.56.0 <1",
+    "@diagrammo/dgmo": ">=0.57.0 <1",
     "vitepress": "^1.0.0"
   },
   "dependencies": {
-    "remark-dgmo": "^0.10.0",
-    "@diagrammo/dgmo": "^0.56.0"
+    "remark-dgmo": "^0.11.0",
+    "@diagrammo/dgmo": "^0.57.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
