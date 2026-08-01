@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.5.0
 
 **🔴 Live links: renamed keyword, renamed option, and now ON by default.** All
 three arrive through `remark-dgmo` and all three are visible to a site that
