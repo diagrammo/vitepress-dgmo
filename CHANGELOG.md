@@ -1,5 +1,50 @@
 # Changelog
 
+## Unreleased
+
+**🔴 Live links: renamed keyword, renamed option, and now ON by default.** All
+three arrive through `remark-dgmo` and all three are visible to a site that
+upgrades and changes nothing.
+
+The fence keyword is now `live-link`:
+
+````md
+```dgmo
+live-link dgm_01HQ3RSTUV
+```
+````
+
+`cloud <id>` no longer resolves — not deprecated, simply no longer a live link.
+Same for `![[cloud:<id>]]`, which becomes `![[live-link:<id>]]`.
+
+The option is `liveLink`, not `references`, and it resolves by default. Pass it
+only to turn live links off:
+
+```js
+dgmo({ liveLink: { enabled: false } });
+```
+
+🔴 **A site that upgrades and does nothing will start fetching from
+`api.diagrammo.app` at build time**, and a `.dgmo/references/` directory will
+appear in the repository wanting to be committed. That is correct by design —
+the cache belongs in your repo so a clean CI checkout never depends on our
+uptime — but it is an unexplained directory until you know why it is there.
+
+With live links off, a `live-link` fence now renders a small card naming the
+diagram, with a hover link through to it, plus a build warning naming the option
+and the source line. It is no longer an error block. See the
+[live links guide](https://diagrammo.app/docs/live-links/).
+
+`refresh` is unchanged and still defaults to `notify`, so the renderer stays out
+of your bundle unless you ask for it.
+
+
+**For VitePress specifically:** this package does not use the remark plugin, but
+it does depend on `remark-dgmo` for the client runtime and `client.css`, so it
+still needs the bump. Live-link resolution is a remark-plugin feature and is not
+part of the VitePress pre-pass — what changes here is the shared client runtime
+and stylesheet.
+
 ## 0.4.0
 
 Bundled `@diagrammo/dgmo` bumped to `^0.54.0` — sankey emphasis directives (`highlight`/`dim`), working infra `default-rps`, a lighter `./completion` subpath, swimlane edge completions, consistent thousands separators, the infra async 2× downstream-load fix, surplus-value warnings, and the body `fill-tint` contrast fix. All legacy spellings still parse; no source changes required.
