@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.6.0
+
+**🔴 Live links never actually worked here. They do now.**
+
+0.5.0 announced live links, and on this package they did not render. Every fence
+went through `renderDgmoBlock`, which treats the body as DGMO source — so a fence
+holding a share URL came back as an error card reading **"Unsupported chart type:
+https://…"**, and the shorter spelling drew a reference card that never fetched
+anything and so never changed:
+
+````md
+```dgmo
+https://online.diagrammo.app/d/dgm_01HQ3RSTUV
+```
+````
+
+The other four wrappers were never affected. Their remark plugin classifies a
+fence body before rendering it; this package has no remark plugin — markdown-it
+host, two-phase cache, by design — and the classification step had no home here.
+`remark-dgmo` 0.13.0 gives it one as `renderDgmoFence`, which the cache now calls.
+
+**One behaviour change worth knowing about:** a live link that resolves to nothing
+now **fails the build** instead of caching an error card. Bad DGMO is still the
+author's to fix and still gets an inline card. But a pointer to a diagram that
+does not exist would otherwise deploy as a small red box on a page nobody re-reads,
+with the id it names as the only clue.
+
+**Requires `remark-dgmo` >= 0.13.0.** It is a dependency, so an install brings it.
+
 ## 0.5.0
 
 **🔴 Live links: renamed keyword, renamed option, and now ON by default.** All
