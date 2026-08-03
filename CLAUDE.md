@@ -4,7 +4,9 @@ VitePress integration: renders ` ```dgmo ` fences to inline SVG at build time. P
 
 ## Not a remark host — but it still tracks remark-dgmo
 
-VitePress renders markdown with **markdown-it, not remark**, so the `remark-dgmo` *plugin* is unusable here and this package never imports it. It nonetheless depends on `remark-dgmo` at runtime for three things: `renderDgmoBlock` (the actual render, in `src/cache.ts`), `bindDgmo` from `remark-dgmo/client.js`, and `dist/client.css` — generated from `remark-dgmo/client.css` by `scripts/build-css.mjs`. **That is why this package bumps alongside dgmo and remark-dgmo even though it is not a remark host.** It is the single most misunderstood thing here.
+VitePress renders markdown with **markdown-it, not remark**, so the `remark-dgmo` *plugin* is unusable here and this package never imports it. It nonetheless depends on `remark-dgmo` at runtime for three things: `renderDgmoFence` (the actual render, in `src/cache.ts`), `bindDgmo` from `remark-dgmo/client.js`, and `dist/client.css` — generated from `remark-dgmo/client.css` by `scripts/build-css.mjs`. **That is why this package bumps alongside dgmo and remark-dgmo even though it is not a remark host.** It is the single most misunderstood thing here.
+
+🔴 **`renderDgmoFence`, never `renderDgmoBlock`.** The block renderer treats a fence body as diagram *source*; the fence renderer classifies it first and fetches when it names a published diagram. Getting this wrong is not a crash — it is a wrong page. Through 0.5.1 this called `renderDgmoBlock`, so a fence holding a share URL rendered "Unsupported chart type: https://…" and the `live-link <id>` spelling drew a card that never fetched. The other four wrappers were fine because their remark plugin does the classification for them; this one has no remark plugin, which is exactly how it went unnoticed. Fixed 2026-08-03, needs `remark-dgmo >= 0.13.0`.
 
 ## The two-phase split
 
@@ -29,4 +31,4 @@ Both halves must share **one** cache instance — that is what `createDgmoParts(
 
 `pnpm build` (tsup + build-css; `postbuild` asserts `dist/client.css` and `dist/client.js` exist) · `pnpm test` (pretest builds) · `pnpm typecheck` · `pnpm lint`.
 
-`tests/fixture/` is a real VitePress site consuming the package via `link:../..` — `cd tests/fixture && pnpm docs:dev` to look at output. `pages.yml` splices dgmo-content's `all-chart-types.md` into that fixture with `scripts/compose-showcase.mjs` and deploys to GitHub Pages; the rewritten page is built, never committed.
+`tests/fixture/` is a real VitePress site consuming the package via `link:../..` — `cd tests/fixture && pnpm docs:dev` to look at output. `pages.yml` splices dgmo-content's `live-links.md` and `all-chart-types.md` into that fixture with `scripts/compose-showcase.mjs` and deploys to GitHub Pages; the rewritten page is built, never committed. `LIVE_LINK_SRC=<path>` reads the live-link section from disk instead of the network, for checking the pair before a dgmo-content push. The fixture pins `@diagrammo/dgmo` **exactly** so the deployed showcase can never quietly build against an older renderer.

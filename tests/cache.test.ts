@@ -1,4 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
+import { ReferenceBuildError } from 'remark-dgmo';
 import {
   createDgmoCache,
   neutralizeBakedStyles,
@@ -10,6 +11,51 @@ const stub: RenderFn = (source, meta) =>
     html: `<div class="dgmo"><svg>${source}|${meta ?? ''}</svg></div>`,
     diagnostics: [],
   });
+
+describe('the default renderer, on a fence that is a live link', () => {
+  // Guards the wiring, not the resolution — remark-dgmo owns the latter. This
+  // package went a whole release with `renderDgmoBlock` here, which fed the
+  // share URL to the DGMO parser, and nothing failed because no test ever put a
+  // live link through the real renderer.
+  const ID = 'dgm_01HQ3';
+  const stubFetch = vi.fn(() =>
+    Promise.resolve(
+      new Response(
+        JSON.stringify({
+          id: ID,
+          source: 'pie Revenue\n  Q1 40\n  Q2 60',
+          dgmoVersion: '0.59.0',
+          updatedAt: 4242,
+        }),
+        { status: 200, headers: { 'content-type': 'application/json' } }
+      )
+    )
+  ) as unknown as typeof fetch;
+
+  const memFs = () => {
+    const files = new Map<string, string>();
+    return {
+      read: (p: string) => Promise.resolve(files.get(p) ?? null),
+      write: (p: string, c: string) => {
+        files.set(p, c);
+        return Promise.resolve();
+      },
+    };
+  };
+
+  it('fetches the published diagram instead of parsing the URL', async () => {
+    const cache = createDgmoCache({
+      colorMode: 'light',
+      liveLink: { enabled: true, fetchImpl: stubFetch, fs: memFs() },
+    });
+    await cache.warm(`https://online.diagrammo.app/d/${ID}`, null);
+    const html = cache.get(`https://online.diagrammo.app/d/${ID}`, null)!;
+
+    expect(html).toContain('<svg');
+    expect(html).toContain(`data-dgmo-ref="${ID}"`);
+    expect(html).not.toContain('dgmo--error');
+  });
+});
 
 describe('createDgmoCache', () => {
   it('warms and returns rendered HTML', async () => {
@@ -66,6 +112,24 @@ describe('createDgmoCache', () => {
     expect(html).toContain('dgmo--error');
     expect(html).toContain('kaboom');
     expect(html).toContain('<pre>bad</pre>');
+  });
+
+  it('fails the build — no error card — when a live link resolves to nothing', async () => {
+    // The one exception to "a bad block never throws". An unresolvable pointer
+    // deploys as a small red box naming an id, on a page nobody re-reads; a
+    // build failure puts it in front of the person who can fix it.
+    const gone: RenderFn = () =>
+      Promise.reject(
+        new ReferenceBuildError('no such diagram', 'dgm_01HQ3', {
+          path: 'docs/index.md',
+          line: 4,
+        })
+      );
+    const cache = createDgmoCache({}, gone);
+    await expect(cache.warm('live-link dgm_01HQ3', null)).rejects.toThrow(
+      'no such diagram'
+    );
+    expect(cache.get('live-link dgm_01HQ3', null)).toBeUndefined();
   });
 
   it('escapes html in the error card', async () => {
