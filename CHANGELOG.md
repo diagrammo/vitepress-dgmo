@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.6.1
+
+**Takes `remark-dgmo` 0.14.0, where the step that asks the Cloud what a pointer
+points at moved into dgmo itself.** Nothing about this integration changes:
+`renderDgmoFence` resolves a live link exactly as before.
+
+The move is worth knowing about here specifically. That fetch used to live where
+only a remark host could reach it — and this package runs markdown-it and no
+remark plugin, which is how 0.5.0 came to announce live links it could not
+render. It now sits in `@diagrammo/dgmo` beside the parser and the card
+renderer, where a live link is a chart type rather than a markdown feature.
+
+🔴 **The `@diagrammo/dgmo` range rises to `>=0.60.0 <1`**, as both the runtime
+dependency and the peer — they have to move together. 0.60.0 is the release that
+adds the `@diagrammo/dgmo/live-link-resolve` subpath that `remark-dgmo` 0.14.0
+imports.
+
+This is a patch and not a minor on purpose. **A caret on a `0.x` version locks
+the minor**, so a site on `^0.6.0` can reach 0.6.1 and cannot reach 0.7.0 — and
+a dependency-floor release that no existing site can install is the exact
+problem this release exists to undo.
+
 ## 0.6.0
 
 **🔴 Live links never actually worked here. They do now.**
