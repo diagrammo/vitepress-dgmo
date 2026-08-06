@@ -1,10 +1,11 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import MarkdownIt from 'markdown-it';
 import {
   withDgmo,
   createDgmoParts,
   parseFenceMeta,
   scanFences,
+  resetRenderSetupNotice,
   type VitePressUserConfig,
 } from '../src/index.js';
 
@@ -66,5 +67,49 @@ describe('withDgmo', () => {
 
   it('re-exports scanFences', () => {
     expect(scanFences('```dgmo\ngraph\n```')[0].lang).toBe('dgmo');
+  });
+});
+
+/**
+ * Nothing on the config side can reach a VitePress theme, so `refresh: 'render'`
+ * needs a second call only the site owner can make. Before this notice existed
+ * the setting was accepted here and then dropped without a word.
+ */
+describe('refresh: render notice', () => {
+  beforeEach(() => {
+    resetRenderSetupNotice();
+  });
+
+  it('names the function and the module to import it from', () => {
+    const info = vi.spyOn(console, 'info').mockImplementation(() => {});
+    withDgmo({}, { liveLink: { refresh: 'render' } });
+    expect(info).toHaveBeenCalledOnce();
+    const message = String(info.mock.calls[0]?.[0]);
+    expect(message).toContain('setupDgmoRender');
+    expect(message).toContain('vitepress-dgmo/client-render');
+    info.mockRestore();
+  });
+
+  it('fires for createDgmoParts too, not only the wrapper', () => {
+    const info = vi.spyOn(console, 'info').mockImplementation(() => {});
+    createDgmoParts({ liveLink: { refresh: 'render' } });
+    expect(info).toHaveBeenCalledOnce();
+    info.mockRestore();
+  });
+
+  it('says nothing on the default, or on an explicit notify', () => {
+    const info = vi.spyOn(console, 'info').mockImplementation(() => {});
+    withDgmo();
+    withDgmo({}, { liveLink: { refresh: 'notify' } });
+    expect(info).not.toHaveBeenCalled();
+    info.mockRestore();
+  });
+
+  it('warns once per build, not once per wrapped config', () => {
+    const info = vi.spyOn(console, 'info').mockImplementation(() => {});
+    withDgmo({}, { liveLink: { refresh: 'render' } });
+    withDgmo({}, { liveLink: { refresh: 'render' } });
+    expect(info).toHaveBeenCalledOnce();
+    info.mockRestore();
   });
 });

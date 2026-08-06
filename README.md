@@ -66,6 +66,29 @@ export default {
 
 The stylesheet keys light/dark visibility on VitePress's `<html class="dark">` convention automatically.
 
+### 3. (Optional) re-draw live links that have moved
+
+A fence can name a published [Diagrammo Cloud](https://diagrammo.app) diagram instead of carrying its own source (`live-link dgm_01HQ3RSTUV`). If that diagram changes after your last build, the page **notices** by default: readers get a small link to the current version. Re-drawing it in the browser instead means shipping the renderer, so it takes two steps that are really one decision.
+
+```ts
+// .vitepress/config.ts
+withDgmo({ title: 'My Docs' }, { liveLink: { refresh: 'render' } });
+```
+
+```ts
+// .vitepress/theme/index.ts — beside setupDgmo(router)
+import { setupDgmoRender } from 'vitepress-dgmo/client-render';
+
+enhanceApp({ router }) {
+  setupDgmo(router)
+  setupDgmoRender()
+}
+```
+
+Set the option without the theme call and your build says so, once, naming both. Vite emits the renderer as its own chunk, fetched only when a diagram has actually changed.
+
+⚠️ If your site sets a Content-Security-Policy it must allow `connect-src https://api.diagrammo.app`, or the baked diagram renders and simply never updates.
+
 ## Usage in markdown
 
 Write a fenced block with the `dgmo` language:

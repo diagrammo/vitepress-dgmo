@@ -36,6 +36,11 @@
       "import": "./dist/client.js",
       "default": "./dist/client.js"
     },
+    "./client-render": {
+      "types": "./dist/client-render.d.ts",
+      "import": "./dist/client-render.js",
+      "default": "./dist/client-render.js"
+    },
     "./client.css": "./dist/client.css"
   },
   "files": [
@@ -49,7 +54,7 @@
   },
   "scripts": {
     "build": "tsup && node scripts/build-css.mjs",
-    "postbuild": "test -f dist/client.css && test -f dist/client.js",
+    "postbuild": "test -f dist/client.css && test -f dist/client.js && test -f dist/client-render.js",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
     "pretest": "pnpm build",

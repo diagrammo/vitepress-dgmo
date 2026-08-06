@@ -70,11 +70,43 @@ export interface DgmoParts {
  * cache. Prefer `withDgmo` unless you need to place the pieces yourself.
  */
 export function createDgmoParts(options: VitePressDgmoOptions = {}): DgmoParts {
+  noticeRenderSetupRequired(options);
   const cache = createDgmoCache(options);
   return {
     dgmoMarkdown: (md: MarkdownIt) => registerDgmoFence(md, cache),
     dgmoVitePlugin: dgmoVitePlugin(cache),
   };
+}
+
+let noticed = false;
+
+/**
+ * Say the second half out loud, once per build.
+ *
+ * `liveLink: { refresh: 'render' }` decides what runs in a reader's browser, and
+ * nothing here can reach a VitePress theme — `enhanceApp` is the site owner's
+ * file. Until `setupDgmoRender()` is called there the setting has no effect
+ * whatsoever, and a diagram that moved gets the "This diagram has been updated"
+ * link instead of being redrawn.
+ *
+ * That silence is the whole defect this exists to close: through 0.6.1 the
+ * option was accepted and dropped, so a site believed it had turned re-rendering
+ * on. A build is the one moment somebody is demonstrably paying attention.
+ *
+ * Test seam: `resetRenderSetupNotice()`.
+ */
+function noticeRenderSetupRequired(options: VitePressDgmoOptions): void {
+  if (noticed) return;
+  if (options.liveLink?.refresh !== 'render') return;
+  noticed = true;
+  console.info(
+    "[vitepress-dgmo] Live links are set to re-render in the browser. Call `setupDgmoRender()` from `vitepress-dgmo/client-render` in your theme's `enhanceApp`, beside `setupDgmo(router)` — without it a diagram that has moved is linked to, not redrawn. Your Content-Security-Policy must also allow `connect-src https://api.diagrammo.app`."
+  );
+}
+
+/** Test seam: reset the once-per-process notice. */
+export function resetRenderSetupNotice(): void {
+  noticed = false;
 }
 
 /**

@@ -8,10 +8,13 @@ import { defineConfig } from 'tsup';
 //     `bindDgmo` + a VitePress router hook). Ships to the browser, but
 //     `remark-dgmo/client.js` is itself external — VitePress resolves it from
 //     node_modules at consumer build time.
+//   - client-render: the opt-in re-render for live links. Its own entry so a
+//     site that has not asked for it never has the renderer in its graph.
 export default defineConfig({
   entry: {
     index: 'src/index.ts',
     client: 'src/client.ts',
+    'client-render': 'src/client-render.ts',
   },
   format: ['esm'],
   // Build-only tsconfig (rootDir: ./src, no tests/) so tsc's declaration
@@ -25,6 +28,10 @@ export default defineConfig({
     '@diagrammo/dgmo',
     'remark-dgmo',
     'remark-dgmo/client.js',
+    // Left for the consumer's bundler to resolve, exactly like client.js —
+    // Vite then emits it as the lazy chunk a reader fetches only when a
+    // live-linked diagram has actually moved.
+    'remark-dgmo/client-render.js',
     'vite',
     'vitepress',
     'markdown-it',
