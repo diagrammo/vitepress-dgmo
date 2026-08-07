@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.6.2
 
 **`liveLink: { refresh: 'render' }` can now actually re-render, and saying it
 without doing it is no longer silent.** The setting was accepted here and had no
