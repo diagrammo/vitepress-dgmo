@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@diagrammo/dgmo':
-        specifier: '>=0.60.0 <1'
-        version: 0.60.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)
+        specifier: '>=0.61.0 <1'
+        version: 0.62.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)
       remark-dgmo:
-        specifier: ^0.14.0
-        version: 0.14.0(@diagrammo/dgmo@0.60.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10))
+        specifier: ^0.14.2
+        version: 0.14.2(@diagrammo/dgmo@0.62.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10))
       vitepress:
         specifier: ^1.0.0
         version: 1.6.4(@algolia/client-search@5.55.1)(@types/node@22.20.0)(postcss@8.5.16)(search-insights@2.17.3)(typescript@6.0.3)
@@ -215,10 +215,9 @@ packages:
   '@dagrejs/graphlib@4.0.1':
     resolution: {integrity: sha512-IvcV6FduIIAmLwnH+yun+QtV36SC7mERqa86aClNqmMN09WhmPPYU8ckHrZBozErf+UvHPWOTJYaGYiIcs0DgA==}
 
-  '@diagrammo/dgmo@0.60.0':
-    resolution: {integrity: sha512-PbpxPmMzHukPda6d0HIoK55fmEYGcmeVQal4rclAcnhvSQNYpDLb8h/KXodoP8VAzOaPxauscjmvDGYHyy4TOw==}
+  '@diagrammo/dgmo@0.62.0':
+    resolution: {integrity: sha512-obuydeVavGJanoS6pxLzJMXi+hZ80FSKxEJ6uHcfhfNY82uYqUUtYbTGZh5xqTm0WgmKzs7kmNKxzBm7IzUxZg==}
     engines: {node: '>=20.6'}
-    hasBin: true
     peerDependencies:
       '@codemirror/language': ^6.12.3
       '@codemirror/state': '*'
@@ -805,82 +804,6 @@ packages:
 
   '@lezer/lr@1.4.10':
     resolution: {integrity: sha512-rnCpTIBafOx4mRp43xOxDJbFipJm/c0cia/V5TiGlhmMa+wsSdoGmUN3w5Bqrks/09Q/D4tNAmWaT8p6NRi77A==}
-
-  '@resvg/resvg-js-android-arm-eabi@2.6.2':
-    resolution: {integrity: sha512-FrJibrAk6v29eabIPgcTUMPXiEz8ssrAk7TXxsiZzww9UTQ1Z5KAbFJs+Z0Ez+VZTYgnE5IQJqBcoSiMebtPHA==}
-    engines: {node: '>= 10'}
-    cpu: [arm]
-    os: [android]
-
-  '@resvg/resvg-js-android-arm64@2.6.2':
-    resolution: {integrity: sha512-VcOKezEhm2VqzXpcIJoITuvUS/fcjIw5NA/w3tjzWyzmvoCdd+QXIqy3FBGulWdClvp4g+IfUemigrkLThSjAQ==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [android]
-
-  '@resvg/resvg-js-darwin-arm64@2.6.2':
-    resolution: {integrity: sha512-nmok2LnAd6nLUKI16aEB9ydMC6Lidiiq2m1nEBDR1LaaP7FGs4AJ90qDraxX+CWlVuRlvNjyYJTNv8qFjtL9+A==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [darwin]
-
-  '@resvg/resvg-js-darwin-x64@2.6.2':
-    resolution: {integrity: sha512-GInyZLjgWDfsVT6+SHxQVRwNzV0AuA1uqGsOAW+0th56J7Nh6bHHKXHBWzUrihxMetcFDmQMAX1tZ1fZDYSRsw==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [darwin]
-
-  '@resvg/resvg-js-linux-arm-gnueabihf@2.6.2':
-    resolution: {integrity: sha512-YIV3u/R9zJbpqTTNwTZM5/ocWetDKGsro0SWp70eGEM9eV2MerWyBRZnQIgzU3YBnSBQ1RcxRZvY/UxwESfZIw==}
-    engines: {node: '>= 10'}
-    cpu: [arm]
-    os: [linux]
-
-  '@resvg/resvg-js-linux-arm64-gnu@2.6.2':
-    resolution: {integrity: sha512-zc2BlJSim7YR4FZDQ8OUoJg5holYzdiYMeobb9pJuGDidGL9KZUv7SbiD4E8oZogtYY42UZEap7dqkkYuA91pg==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [linux]
-
-  '@resvg/resvg-js-linux-arm64-musl@2.6.2':
-    resolution: {integrity: sha512-3h3dLPWNgSsD4lQBJPb4f+kvdOSJHa5PjTYVsWHxLUzH4IFTJUAnmuWpw4KqyQ3NA5QCyhw4TWgxk3jRkQxEKg==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [linux]
-
-  '@resvg/resvg-js-linux-x64-gnu@2.6.2':
-    resolution: {integrity: sha512-IVUe+ckIerA7xMZ50duAZzwf1U7khQe2E0QpUxu5MBJNao5RqC0zwV/Zm965vw6D3gGFUl7j4m+oJjubBVoftw==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [linux]
-
-  '@resvg/resvg-js-linux-x64-musl@2.6.2':
-    resolution: {integrity: sha512-UOf83vqTzoYQO9SZ0fPl2ZIFtNIz/Rr/y+7X8XRX1ZnBYsQ/tTb+cj9TE+KHOdmlTFBxhYzVkP2lRByCzqi4jQ==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [linux]
-
-  '@resvg/resvg-js-win32-arm64-msvc@2.6.2':
-    resolution: {integrity: sha512-7C/RSgCa+7vqZ7qAbItfiaAWhyRSoD4l4BQAbVDqRRsRgY+S+hgS3in0Rxr7IorKUpGE69X48q6/nOAuTJQxeQ==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [win32]
-
-  '@resvg/resvg-js-win32-ia32-msvc@2.6.2':
-    resolution: {integrity: sha512-har4aPAlvjnLcil40AC77YDIk6loMawuJwFINEM7n0pZviwMkMvjb2W5ZirsNOZY4aDbo5tLx0wNMREp5Brk+w==}
-    engines: {node: '>= 10'}
-    cpu: [ia32]
-    os: [win32]
-
-  '@resvg/resvg-js-win32-x64-msvc@2.6.2':
-    resolution: {integrity: sha512-ZXtYhtUr5SSaBrUDq7DiyjOFJqBVL/dOBN7N/qmi/pO0IgiWW/f/ue3nbvu9joWE5aAKDoIzy/CxsY0suwGosQ==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [win32]
-
-  '@resvg/resvg-js@2.6.2':
-    resolution: {integrity: sha512-xBaJish5OeGmniDj9cW5PRa/PtmuVU3ziqrbr5xJj901ZDN4TosrVaNZpEiLZAxdfnhAe7uQ7QFWfjPe9d9K2Q==}
-    engines: {node: '>= 10'}
 
   '@rollup/rollup-android-arm-eabi@4.62.2':
     resolution: {integrity: sha512-6o7ZLZK+BeenkZCFNDXqpbjw9bD6nuWonvS/lwQJp7NoVVxm6p3qE7qQ5jGuBjiFsgvqjD8mZAU5oWxTmbOeOg==}
@@ -1901,11 +1824,11 @@ packages:
   regex@6.1.0:
     resolution: {integrity: sha512-6VwtthbV4o/7+OaAF9I5L5V3llLEsoPyq9P1JVXkedTP33c7MfCG0/5NOPcSJn0TzXcG9YUrR0gQSWioew3LDg==}
 
-  remark-dgmo@0.14.0:
-    resolution: {integrity: sha512-9uZwzaubuJnpKgf/5dnZGJAUmGz1Z/Z1j+yHbuCNzndWq5/7j1ZwlBcx+cCwzY4JqhKrnvMhXbGNypmU0VqdKQ==}
+  remark-dgmo@0.14.2:
+    resolution: {integrity: sha512-EcVnFxc9L6rL1wnF8srooazPKAuH9Kh/EK1tYLWe+hgNctWZiFxxpPeaoz7+R2uMTHQrs2YzM2M/JmVy7D8WEA==}
     engines: {node: '>=20.6'}
     peerDependencies:
-      '@diagrammo/dgmo': '>=0.60.0 <1'
+      '@diagrammo/dgmo': '>=0.61.0 <1'
 
   require-from-string@2.0.2:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
@@ -2483,10 +2406,9 @@ snapshots:
 
   '@dagrejs/graphlib@4.0.1': {}
 
-  '@diagrammo/dgmo@0.60.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)':
+  '@diagrammo/dgmo@0.62.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)':
     dependencies:
       '@dagrejs/dagre': 3.0.0
-      '@resvg/resvg-js': 2.6.2
       d3-array: 3.2.4
       d3-cloud: 1.2.9
       d3-geo: 3.1.1
@@ -2835,57 +2757,6 @@ snapshots:
   '@lezer/lr@1.4.10':
     dependencies:
       '@lezer/common': 1.5.2
-
-  '@resvg/resvg-js-android-arm-eabi@2.6.2':
-    optional: true
-
-  '@resvg/resvg-js-android-arm64@2.6.2':
-    optional: true
-
-  '@resvg/resvg-js-darwin-arm64@2.6.2':
-    optional: true
-
-  '@resvg/resvg-js-darwin-x64@2.6.2':
-    optional: true
-
-  '@resvg/resvg-js-linux-arm-gnueabihf@2.6.2':
-    optional: true
-
-  '@resvg/resvg-js-linux-arm64-gnu@2.6.2':
-    optional: true
-
-  '@resvg/resvg-js-linux-arm64-musl@2.6.2':
-    optional: true
-
-  '@resvg/resvg-js-linux-x64-gnu@2.6.2':
-    optional: true
-
-  '@resvg/resvg-js-linux-x64-musl@2.6.2':
-    optional: true
-
-  '@resvg/resvg-js-win32-arm64-msvc@2.6.2':
-    optional: true
-
-  '@resvg/resvg-js-win32-ia32-msvc@2.6.2':
-    optional: true
-
-  '@resvg/resvg-js-win32-x64-msvc@2.6.2':
-    optional: true
-
-  '@resvg/resvg-js@2.6.2':
-    optionalDependencies:
-      '@resvg/resvg-js-android-arm-eabi': 2.6.2
-      '@resvg/resvg-js-android-arm64': 2.6.2
-      '@resvg/resvg-js-darwin-arm64': 2.6.2
-      '@resvg/resvg-js-darwin-x64': 2.6.2
-      '@resvg/resvg-js-linux-arm-gnueabihf': 2.6.2
-      '@resvg/resvg-js-linux-arm64-gnu': 2.6.2
-      '@resvg/resvg-js-linux-arm64-musl': 2.6.2
-      '@resvg/resvg-js-linux-x64-gnu': 2.6.2
-      '@resvg/resvg-js-linux-x64-musl': 2.6.2
-      '@resvg/resvg-js-win32-arm64-msvc': 2.6.2
-      '@resvg/resvg-js-win32-ia32-msvc': 2.6.2
-      '@resvg/resvg-js-win32-x64-msvc': 2.6.2
 
   '@rollup/rollup-android-arm-eabi@4.62.2':
     optional: true
@@ -3980,9 +3851,9 @@ snapshots:
     dependencies:
       regex-utilities: 2.3.0
 
-  remark-dgmo@0.14.0(@diagrammo/dgmo@0.60.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)):
+  remark-dgmo@0.14.2(@diagrammo/dgmo@0.62.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)):
     dependencies:
-      '@diagrammo/dgmo': 0.60.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)
+      '@diagrammo/dgmo': 0.62.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
       '@lezer/lr': 1.4.10

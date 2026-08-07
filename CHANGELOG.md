@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.6.3
+
+🔴 **The `@diagrammo/dgmo` peer floor rises to `>=0.61.0 <1`, correcting a range
+this package could not honour.**
+
+It advertised `>=0.60.0 <1` while depending on `remark-dgmo ^0.14.0`, which now
+resolves to 0.14.2 — and that imports `parseCloudReferenceFence`, which first
+ships in dgmo **0.61.0**. So a site pinned to dgmo 0.60.x installed a combination
+this package called supported, and got a module-resolution error:
+
+```
+SyntaxError: The requested module '@diagrammo/dgmo/cloud-reference'
+does not provide an export named 'parseCloudReferenceFence'
+```
+
+npm cannot catch this — nothing validates a peer range against the peers of your
+own dependencies — so stating the floor correctly is the only fix. Found
+2026-08-06, when it took down a showcase build.
+
+Here the range moves in **both** places — `@diagrammo/dgmo` is declared as a
+runtime dependency as well as a peer, and raising one alone re-creates the same
+class of mismatch this release exists to remove.
+
+The `remark-dgmo` dependency moves to `^0.14.2` in the same breath, and the
+test fixture is repinned off dgmo 0.60.0, which the new floor forbids.
+
 ## 0.6.2
 
 **`liveLink: { refresh: 'render' }` can now actually re-render, and saying it
