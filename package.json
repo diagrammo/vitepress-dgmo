@@ -3,6 +3,7 @@
   "version": "0.6.3",
   "description": "VitePress integration to render DGMO diagrams from fenced code blocks at build time. A markdown-it fence override backed by an async pre-render cache — `withDgmo()` wires both into your .vitepress/config.ts in one call.",
   "license": "MIT",
+  "author": "Diagrammo LLC",
   "repository": {
     "type": "git",
     "url": "https://github.com/diagrammo/vitepress-dgmo.git"
