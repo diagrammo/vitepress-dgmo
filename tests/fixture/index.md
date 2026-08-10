@@ -16,3 +16,17 @@ at build time, as inline SVG, through the markdown-it fence override.
 flowchart
 [Start] -> [Render at build time] -> [Ship inline SVG]
 ```
+
+## Maps
+
+A `map` needs basemap outlines, and `@diagrammo/dgmo` reads nothing from disk on
+its own. The pre-pass supplies them for every `dgmo` fence, so a map renders at
+build time like any other chart type — no extra configuration in
+`.vitepress/config.ts`.
+
+```dgmo
+map Port Calls
+
+poi Denver
+poi Miami
+```

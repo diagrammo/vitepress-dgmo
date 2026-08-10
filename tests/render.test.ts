@@ -32,4 +32,33 @@ describe('real render (integration)', () => {
     expect(out).toContain('dgmo-light');
     expect(out).toContain('dgmo-dark');
   });
+
+  // A map is the one chart type that needs basemap outlines, and dgmo 0.62.0
+  // stopped reading them off disk implicitly — `renderDgmoFence` has to supply
+  // them. No fixture held a map fence, so the gap shipped unnoticed; this is the
+  // test that would have caught it.
+  it('renders a map with basemap data rather than the error card', async () => {
+    const source = 'map Port Calls\n\npoi Denver\npoi Miami';
+    const cache = createDgmoCache({ palette: 'slate' });
+
+    const plugin = dgmoVitePlugin(cache);
+    const t = plugin.transform;
+    const transform = (typeof t === 'function' ? t : t?.handler)!;
+    await transform.call(
+      {} as never,
+      '```dgmo\n' + source + '\n```',
+      '/docs/map.md'
+    );
+
+    const md = new MarkdownIt();
+    registerDgmoFence(md, cache);
+    const out = md.render('```dgmo\n' + source + '\n```');
+
+    expect(out).toContain('<svg');
+    expect(out).toContain('Denver');
+    expect(out).toContain('Miami');
+    expect(out).not.toContain('no basemap data');
+    expect(out).not.toContain("Couldn't render this diagram");
+    expect(out).not.toContain('dgmo--error');
+  });
 });
