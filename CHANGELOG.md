@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.6.5
+
+**The first release published by GitHub Actions rather than from a laptop.**
+Nothing in the package changed — this version exists to exercise the new publish
+path end to end, and it is the first `vitepress-dgmo` tarball to carry a
+provenance attestation, which npm can only issue to a build it ran itself.
+
+The release now authenticates over npm trusted publishing: the workflow proves
+which repository it is running in and is handed a credential valid for that run
+alone, so no long-lived token is involved at any point. The credential the
+previous releases used is a bypass-2FA token, and npm removes direct publish
+from those in January 2027.
+
 ## 0.6.4
 
 **The licence names the company that now publishes this.** Diagrammo LLC
