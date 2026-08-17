@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.6.6
+
+**Verified against `@diagrammo/dgmo` 0.71.0 and `remark-dgmo` 0.14.4 — the
+versions this package had stopped installing without anyone noticing.** The
+declared ranges already admitted both, and that is precisely the problem: a
+lockfile entry that already satisfies its range is never re-resolved, so a plain
+install went on handing this repo dgmo 0.66.0 and remark-dgmo 0.14.3 through
+five dgmo minors. The build, the tests and the typecheck were all green against
+renderers nobody was shipping.
+
+Refreshing the lockfile is the whole change. `pnpm install` cannot do it — it
+takes `pnpm update` naming the two packages, and the check that it worked is
+reading the version out of `node_modules`, not out of the lockfile or the
+declared range.
+
+The declared dependency and peer ranges are deliberately unchanged. Those floors
+are set by which `@diagrammo/dgmo` subpaths this package and `remark-dgmo`
+import, no import moved, and raising a floor for no reason forces every consumer
+onto a newer renderer than the code actually needs.
+
 ## 0.6.5
 
 **The first release published by GitHub Actions rather than from a laptop.**
