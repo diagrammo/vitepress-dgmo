@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.6.7
+
+**Verified against `@diagrammo/dgmo` 0.72.0 and `remark-dgmo` 0.14.5.** The
+`remark-dgmo` dependency moves to `^0.14.5`; the `@diagrammo/dgmo` range stays
+at `>=0.61.0 <1` and its lockfile entry was refreshed onto 0.72.0 by hand,
+because a satisfied range is never re-resolved and raising that floor would
+push a version requirement onto consumers for no reason. A caret would be worse
+still — on a `0.x` version it locks the minor, so `^0.72.0` would exclude 0.73.
+
 ## 0.6.6
 
 **Verified against `@diagrammo/dgmo` 0.71.0 and `remark-dgmo` 0.14.4 — the
