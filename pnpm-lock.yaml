@@ -9,10 +9,10 @@ importers:
   .:
     dependencies:
       '@diagrammo/dgmo':
-        specifier: ^0.74.0
+        specifier: '>=0.61.0 <1'
         version: 0.74.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)
       remark-dgmo:
-        specifier: ^0.14.6
+        specifier: ^0.14.5
         version: 0.14.6(@diagrammo/dgmo@0.74.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10))
       vitepress:
         specifier: ^1.0.0
