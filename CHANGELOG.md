@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.6.9
+
+**Verified against `@diagrammo/dgmo` 0.75.0 and `remark-dgmo` 0.14.7.** The `@diagrammo/dgmo` range stays at
+`>=0.61.0 <1` and its lockfile entry was refreshed onto 0.75.0 by hand, because
+a satisfied range is never re-resolved and raising that floor would push a
+version requirement onto consumers for no reason. A caret would be worse still —
+on a `0.x` version it locks the minor, so `^0.75.0` would exclude 0.76.
+The `remark-dgmo` dependency moves to `^0.14.7`, so what the fixture builds
+against is what this release was checked on — a range that already matches what
+is installed is never re-resolved, which is the only reason a declaration has to
+move at all.
+
+Nothing in this package's own source changes. What readers get is dgmo 0.75.0:
+a PERT chart no longer draws its Summary card, stating its headline once in the
+subtitle instead, and a collapsed sequence group's corners no longer blob.
+
+## 0.6.8
+
+The NUL separator is written as an escape rather than as a literal byte, and
+the class it guards is guarded (#348). The test fixture's favicon catches up
+with the rest of the workspace (#349).
+
 ## 0.6.7
 
 **Verified against `@diagrammo/dgmo` 0.72.0 and `remark-dgmo` 0.14.5.** The
