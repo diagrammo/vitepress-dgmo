@@ -25,6 +25,14 @@ const source = readFileSync(sourcePath, 'utf8');
 // shared `adaptClientCssToClassToggle` helper from remark-dgmo/client-css
 // (default toggleSelector `html.dark`) so the rewrite stays in sync with the
 // other host integrations instead of being hand-copied here.
+//
+// 🔴 Still needed after remark-dgmo 0.15.0, which added `html.dark` rules of
+// its own — it added them for the two color-mode VISIBILITY rules only. The
+// lightbox background and every `.dgmo-tok-*` source colour are still keyed on
+// the attribute alone, so dropping this rewrite in favour of a verbatim copy
+// costs a VitePress site its dark source panel and a light lightbox on a dark
+// page. Tried and reverted 2026-08-26. The visible cost of keeping it is one
+// duplicated pair of visibility rules in the output; that is intentional.
 const adapted = adaptClientCssToClassToggle(source);
 
 const banner =

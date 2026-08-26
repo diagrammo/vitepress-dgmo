@@ -2,6 +2,14 @@
 
 ## 0.7.0
 
+**Verified against `@diagrammo/dgmo` 0.76.0 and `remark-dgmo` 0.15.0.** The
+`remark-dgmo` dependency moves to `^0.15.0` — on a `0.x` version a caret locks
+the minor, so `^0.14.7` would have kept every consumer on the old stylesheet.
+The `@diagrammo/dgmo` range stays at `>=0.61.0 <1` and its lockfile entry was
+refreshed onto 0.76.0: 0.76.0 is what emits the dark wrapper's `hidden`
+attribute, but a site on an older dgmo still toggles correctly through the
+stylesheet, so there is no reason to push a version requirement onto consumers.
+
 ### Fixed
 
 - **`withDgmo` adds the color-mode stylesheet to every page — a site that never
@@ -27,6 +35,12 @@
 
 - `tests/fixture/.vitepress/theme/index.ts` no longer imports the stylesheet,
   so the fixture build is now proving the injection rather than the theme file.
+- `scripts/build-css.mjs` documents why its `[data-theme="dark"]` → `html.dark`
+  rewrite survives remark-dgmo 0.15.0 adding `html.dark` rules of its own: 0.15.0
+  added them for the two visibility rules only, while the lightbox background and
+  every `.dgmo-tok-*` source colour are still keyed on the attribute alone.
+  Replacing the rewrite with a verbatim copy was tried and reverted — it costs a
+  VitePress site its dark source panel and gives it a light lightbox on a dark page.
 
 ## 0.6.9
 
