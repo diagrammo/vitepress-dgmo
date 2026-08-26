@@ -46,15 +46,14 @@ export default defineConfig(
 
 `withDgmo` registers **both** halves of the integration (see [How it works](#how-it-works)) while preserving any `markdown.config` and `vite.plugins` you already have.
 
-### 2. (Optional) client enhancement + styles
+### 2. (Optional) client enhancement
 
-Diagrams are fully rendered at build time, so this step is optional. It adds light/dark toggling styles, viewBox tightening, and showcase copy / open-in-editor buttons.
+Diagrams are fully rendered at build time, so this step is optional. It adds viewBox tightening and showcase copy / open-in-editor buttons.
 
 ```ts
 // .vitepress/theme/index.ts
 import DefaultTheme from 'vitepress/theme';
 import { setupDgmo } from 'vitepress-dgmo/client';
-import 'vitepress-dgmo/client.css';
 
 export default {
   extends: DefaultTheme,
@@ -64,7 +63,9 @@ export default {
 };
 ```
 
-The stylesheet keys light/dark visibility on VitePress's `<html class="dark">` convention automatically.
+**The stylesheet is not part of this step.** Since 0.7.0 `withDgmo` adds `vitepress-dgmo/client.css` to every page itself, so light/dark visibility works whether or not you do the above. It keys on VitePress's `<html class="dark">` convention, and on `data-theme="dark"` for good measure.
+
+Through 0.6.x that import was a line you had to add here by hand — and a site that skipped it rendered every diagram **twice**, light and dark stacked, with a green build and nothing said anywhere (issue 507). Opt out with `withDgmo(config, { injectClientCss: false })` if you ship your own copy of the color-mode rules; importing it yourself as well is harmless, since Vite resolves both to one module.
 
 ### 3. (Optional) re-draw live links that have moved
 

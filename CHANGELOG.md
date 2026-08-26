@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.7.0
+
+### Fixed
+
+- **`withDgmo` adds the color-mode stylesheet to every page — a site that never
+  edited its theme file no longer renders each diagram twice.** Under the
+  default `colorMode: 'auto'` every fence produces two SVGs, light and dark,
+  and `vitepress-dgmo/client.css` is the only thing hiding the one you are not
+  in. Importing it was a hand-written line in `.vitepress/theme/index.ts`,
+  filed under an "(Optional)" heading, so a site that skipped it printed the
+  same diagram twice, stacked, on a green build with no warning anywhere.
+
+### Added
+
+- **`injectClientCss`** (default `true`). Set `false` if you ship your own copy
+  of the color-mode rules. Importing the stylesheet yourself as well is
+  harmless — Vite resolves both to one module.
+- `dgmoClientCssPlugin`, exported for sites that place the Vite plugins
+  themselves rather than going through `withDgmo`. It runs `enforce: 'post'`
+  so the `.md` module has already been through VitePress's markdown→Vue
+  transform and is JavaScript by the time the import is added, and it appends
+  rather than prepends, so existing line numbers and sourcemaps are untouched.
+
+### Changed
+
+- `tests/fixture/.vitepress/theme/index.ts` no longer imports the stylesheet,
+  so the fixture build is now proving the injection rather than the theme file.
+
 ## 0.6.9
 
 **Verified against `@diagrammo/dgmo` 0.75.0 and `remark-dgmo` 0.14.7.** The `@diagrammo/dgmo` range stays at

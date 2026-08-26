@@ -10,15 +10,20 @@ import {
 } from '../src/index.js';
 
 describe('withDgmo', () => {
-  it('registers the fence override and the vite pre-pass plugin', () => {
+  it('registers the fence override, the vite pre-pass, and the stylesheet', () => {
     const config = withDgmo({}, { palette: 'slate' });
     expect(typeof config.markdown?.config).toBe('function');
-    const plugins = config.vite?.plugins ?? [];
-    expect(plugins).toHaveLength(1);
-    expect((plugins[0] as { name: string }).name).toBe(
-      'vitepress-dgmo:warm-cache'
-    );
-    expect((plugins[0] as { enforce: string }).enforce).toBe('pre');
+    const plugins = (config.vite?.plugins ?? []) as {
+      name: string;
+      enforce: string;
+    }[];
+    expect(plugins.map((p) => p.name)).toEqual([
+      'vitepress-dgmo:warm-cache',
+      'vitepress-dgmo:client-css',
+    ]);
+    // pre so the cache warms before VitePress's markdown transform, post so
+    // the stylesheet import lands on a module that is already JavaScript
+    expect(plugins.map((p) => p.enforce)).toEqual(['pre', 'post']);
   });
 
   it('preserves an existing markdown.config and vite.plugins', () => {
@@ -40,7 +45,7 @@ describe('withDgmo', () => {
     // User's plugin kept, ours appended.
     const plugins = config.vite?.plugins ?? [];
     expect(plugins[0]).toBe(existingPlugin);
-    expect(plugins).toHaveLength(2);
+    expect(plugins).toHaveLength(3); // theirs, warm-cache, client-css
 
     // User's markdown.config still runs.
     const md = new MarkdownIt();

@@ -20,6 +20,7 @@
 import type MarkdownIt from 'markdown-it';
 import type { DgmoOptions } from 'remark-dgmo';
 import { createDgmoCache } from './cache.js';
+import { dgmoClientCssPlugin } from './client-css-plugin.js';
 import { dgmoVitePlugin } from './vite-plugin.js';
 import { registerDgmoFence } from './markdown.js';
 
@@ -30,7 +31,23 @@ import { registerDgmoFence } from './markdown.js';
  * Per-block overrides go in the fence info string, e.g.
  * ` ```dgmo showcase palette=catppuccin title="Login flow" `.
  */
-export type VitePressDgmoOptions = DgmoOptions;
+export type VitePressDgmoOptions = DgmoOptions & {
+  /**
+   * Whether `withDgmo` adds `vitepress-dgmo/client.css` to every page.
+   * Default `true`.
+   *
+   * Under the default `colorMode: 'auto'` each fence renders TWO SVGs, and
+   * that stylesheet is what hides the one you are not in. It used to be a
+   * hand-written import in `.vitepress/theme/index.ts`, which people
+   * reasonably did not know to add, and the result was the same diagram
+   * printed twice with a green build and nothing said (issue 507).
+   *
+   * Set `false` only if you ship your own copy of those rules. Importing the
+   * stylesheet yourself as well is harmless — Vite resolves both to one
+   * module.
+   */
+  injectClientCss?: boolean;
+};
 
 /**
  * Minimal structural mirror of VitePress's `UserConfig`. We only read/augment
@@ -144,7 +161,10 @@ export function withDgmo(
     },
     vite: {
       ...config.vite,
-      plugins: [...existingPlugins, vitePlugin],
+      plugins:
+        options.injectClientCss === false
+          ? [...existingPlugins, vitePlugin]
+          : [...existingPlugins, vitePlugin, dgmoClientCssPlugin()],
     },
   };
 }
@@ -160,5 +180,6 @@ export { createDgmoCache } from './cache.js';
 export type { DgmoCache, RenderFn } from './cache.js';
 export { registerDgmoFence, splitInfo, wrapVPre } from './markdown.js';
 export { dgmoVitePlugin } from './vite-plugin.js';
+export { dgmoClientCssPlugin } from './client-css-plugin.js';
 export { scanFences } from './scan-fences.js';
 export type { ScannedFence } from './scan-fences.js';

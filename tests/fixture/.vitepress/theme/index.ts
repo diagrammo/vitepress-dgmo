@@ -2,9 +2,13 @@ import { h } from 'vue';
 import DefaultTheme from 'vitepress/theme';
 import type { Theme } from 'vitepress';
 import { setupDgmo } from 'vitepress-dgmo/client';
-import 'vitepress-dgmo/client.css';
 import DgmoBanner from './DgmoBanner.vue';
 
+// `vitepress-dgmo/client.css` is deliberately NOT imported here. Since 0.7.0
+// `withDgmo` adds it to every page itself, and this fixture is the proof —
+// re-adding the import would hide a regression that renders every diagram
+// twice (issue 507).
+//
 // Diagrams are fully rendered at build time, so this enhancement is optional.
 // It adds viewBox tightening, theme-aware light/dark toggling, and wires the
 // showcase copy / open-in-editor buttons — re-run on every SPA route change.
