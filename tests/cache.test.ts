@@ -176,9 +176,9 @@ describe('createDgmoCache', () => {
 
 describe('neutralizeBakedStyles', () => {
   it('rewrites a bare inline <style> to an inert <desc>', () => {
-    expect(neutralizeBakedStyles('<svg><style>a{color:red}</style></svg>')).toBe(
-      '<svg><desc class="dgmo-baked-css">a{color:red}</desc></svg>'
-    );
+    expect(
+      neutralizeBakedStyles('<svg><style>a{color:red}</style></svg>')
+    ).toBe('<svg><desc class="dgmo-baked-css">a{color:red}</desc></svg>');
   });
 
   it('handles multiple <style> blocks (dual light/dark render)', () => {

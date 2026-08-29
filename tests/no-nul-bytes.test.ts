@@ -31,12 +31,31 @@ const REPO = execFileSync('git', ['rev-parse', '--show-toplevel'], {
 
 /** Extensions where a raw NUL is a defect rather than the file's nature. */
 const TEXT = new Set([
-  '.ts', '.tsx', '.js', '.jsx', '.mjs', '.cjs', '.json', '.md', '.mdx',
-  '.css', '.html', '.yml', '.yaml', '.toml', '.rs', '.sh', '.dgmo', '.svg',
+  '.ts',
+  '.tsx',
+  '.js',
+  '.jsx',
+  '.mjs',
+  '.cjs',
+  '.json',
+  '.md',
+  '.mdx',
+  '.css',
+  '.html',
+  '.yml',
+  '.yaml',
+  '.toml',
+  '.rs',
+  '.sh',
+  '.dgmo',
+  '.svg',
 ]);
 
 function trackedTextFiles(): string[] {
-  return execFileSync('git', ['ls-files', '-z'], { cwd: REPO, encoding: 'utf8' })
+  return execFileSync('git', ['ls-files', '-z'], {
+    cwd: REPO,
+    encoding: 'utf8',
+  })
     .split('\0')
     .filter(Boolean)
     .filter((f) => TEXT.has(f.slice(f.lastIndexOf('.')).toLowerCase()));
@@ -53,7 +72,7 @@ describe('tracked source carries no literal NUL bytes', () => {
       offenders,
       offenders.length
         ? `Write the escape \\0 instead of a raw 0x00 byte in:\n  ${offenders.join('\n  ')}`
-        : '',
+        : ''
     ).toEqual([]);
   });
 });

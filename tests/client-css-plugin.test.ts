@@ -32,7 +32,10 @@ describe('dgmoClientCssPlugin (issue 507)', () => {
   });
 
   it('matches a markdown id carrying a Vite query suffix', () => {
-    const out = transform('export default {}', '/docs/index.md?vue&type=script');
+    const out = transform(
+      'export default {}',
+      '/docs/index.md?vue&type=script'
+    );
     expect(out?.code).toContain(CLIENT_CSS_SPECIFIER);
   });
 
