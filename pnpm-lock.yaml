@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@diagrammo/dgmo':
-        specifier: '>=0.77.0 <1'
-        version: 0.77.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)
+        specifier: '>=0.79.0 <1'
+        version: 0.79.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)
       remark-dgmo:
-        specifier: '>=0.15.1 <1'
-        version: 0.15.1(@diagrammo/dgmo@0.77.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10))
+        specifier: '>=0.15.2 <1'
+        version: 0.15.2(@diagrammo/dgmo@0.79.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10))
       vitepress:
         specifier: ^1.0.0
         version: 1.6.4(@algolia/client-search@5.55.1)(@types/node@22.20.0)(postcss@8.5.16)(search-insights@2.17.3)(typescript@6.0.3)
@@ -209,14 +209,14 @@ packages:
     resolution: {integrity: sha512-QxULHAm7cNu72w97JUNCBFODFaXpbDg+dP8b/oWFAZ2MTRppA3U00Y2L1HqaS4J6yBqxwa/Y3nMBaxVKbB/NsA==}
     engines: {node: '>=20.19.0'}
 
-  '@dagrejs/dagre@3.0.0':
-    resolution: {integrity: sha512-ZzhnTy1rfuoew9Ez3EIw4L2znPGnYYhfn8vc9c4oB8iw6QAsszbiU0vRhlxWPFnmmNSFAkrYeF1PhM5m4lAN0Q==}
+  '@dagrejs/dagre@3.1.1':
+    resolution: {integrity: sha512-zroZB1dFOFiGgv4Xcrn1DckB1o4aOikPqD2NDQPV0WM//CXGcS6xiD0rNkqHmw6FEg4tabt4nxPLwgCWT+Vb2A==}
 
-  '@dagrejs/graphlib@4.0.1':
-    resolution: {integrity: sha512-IvcV6FduIIAmLwnH+yun+QtV36SC7mERqa86aClNqmMN09WhmPPYU8ckHrZBozErf+UvHPWOTJYaGYiIcs0DgA==}
+  '@dagrejs/graphlib@4.0.5':
+    resolution: {integrity: sha512-7xrBTqIts3o+PMUZX97wSc+7TUbW+/rULzGNCTP6yooNVDXbzw4Wutg/H/xOutTB/c/k0YqOAavgPh4/Zk9PFA==}
 
-  '@diagrammo/dgmo@0.77.0':
-    resolution: {integrity: sha512-7mqejtdCDA3ewBzBjd4H2bkeftetvN8YET1wwdd3e9ugoIFBypYRyzmU2Ta0ttDBvgZhWSMqz4i3NGrjAQvR/A==}
+  '@diagrammo/dgmo@0.79.0':
+    resolution: {integrity: sha512-vVuee3VVOY7thp3RUH5gAIgfZfat41ajsl/YXO9F7WjRuvOzYR79SrpM74xxSSWrVZIW0mo+QDJglm+PxL6T3A==}
     engines: {node: '>=20.6'}
     peerDependencies:
       '@codemirror/language': ^6.12.3
@@ -1824,8 +1824,8 @@ packages:
   regex@6.1.0:
     resolution: {integrity: sha512-6VwtthbV4o/7+OaAF9I5L5V3llLEsoPyq9P1JVXkedTP33c7MfCG0/5NOPcSJn0TzXcG9YUrR0gQSWioew3LDg==}
 
-  remark-dgmo@0.15.1:
-    resolution: {integrity: sha512-OTbtBJL6weBhxU0hnjnNYu+Vv4puWcUA5nvBykGTr7nLVlRtXJWw5E9DiiweM5DEs6UFaUBB95zqZcAZcQQnMQ==}
+  remark-dgmo@0.15.2:
+    resolution: {integrity: sha512-aUYLX1sR2ogff7P3ancyvnUW6pkvEsVElesRLdaBcnm3M3/2JRR6FtJ9cY/bc9wmBKOSVKJXuxd4MalauWaI2A==}
     engines: {node: '>=20.6'}
     peerDependencies:
       '@diagrammo/dgmo': '>=0.61.0 <1'
@@ -2400,15 +2400,15 @@ snapshots:
 
   '@csstools/css-tokenizer@4.0.0': {}
 
-  '@dagrejs/dagre@3.0.0':
+  '@dagrejs/dagre@3.1.1':
     dependencies:
-      '@dagrejs/graphlib': 4.0.1
+      '@dagrejs/graphlib': 4.0.5
 
-  '@dagrejs/graphlib@4.0.1': {}
+  '@dagrejs/graphlib@4.0.5': {}
 
-  '@diagrammo/dgmo@0.77.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)':
+  '@diagrammo/dgmo@0.79.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)':
     dependencies:
-      '@dagrejs/dagre': 3.0.0
+      '@dagrejs/dagre': 3.1.1
       d3-array: 3.2.4
       d3-cloud: 1.2.9
       d3-geo: 3.1.1
@@ -3851,9 +3851,9 @@ snapshots:
     dependencies:
       regex-utilities: 2.3.0
 
-  remark-dgmo@0.15.1(@diagrammo/dgmo@0.77.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)):
+  remark-dgmo@0.15.2(@diagrammo/dgmo@0.79.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)):
     dependencies:
-      '@diagrammo/dgmo': 0.77.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)
+      '@diagrammo/dgmo': 0.79.0(@lezer/common@1.5.2)(@lezer/highlight@1.2.3)(@lezer/lr@1.4.10)
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
       '@lezer/lr': 1.4.10
