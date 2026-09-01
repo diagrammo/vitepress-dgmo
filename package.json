@@ -72,7 +72,7 @@
     "vitepress": "^1.0.0"
   },
   "dependencies": {
-    "@diagrammo/dgmo": ">=0.79.0 <1",
+    "@diagrammo/dgmo": ">=0.80.0 <1",
     "remark-dgmo": ">=0.15.2 <1"
   },
   "devDependencies": {
