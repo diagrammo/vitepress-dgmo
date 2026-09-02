@@ -9,7 +9,7 @@
     "docs:preview": "if command -v claim-port >/dev/null 2>&1; then claim-port 4346 || { [ $? -eq 3 ] || exit 1; exit 0; }; fi; vitepress preview --port 4346"
   },
   "dependencies": {
-    "@diagrammo/dgmo": "0.81.0",
+    "@diagrammo/dgmo": "0.82.0",
     "vitepress": "^1.6.4",
     "vitepress-dgmo": "link:../.."
   },
