@@ -73,7 +73,7 @@
   },
   "dependencies": {
     "@diagrammo/dgmo": ">=0.83.0 <1",
-    "remark-dgmo": ">=0.15.5 <1"
+    "remark-dgmo": ">=0.15.6 <1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
