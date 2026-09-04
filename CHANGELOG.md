@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.7.5
+
+**Verified against `@diagrammo/dgmo` 0.83.0 and `remark-dgmo` 0.15.5.** In this
+package's manifest the `@diagrammo/dgmo` range moves to `>=0.83.0 <1`. That
+move is the release: an open range npm has already satisfied is never
+re-resolved, so the previous version was built and tested against
+whatever it happened to have installed rather than against what this workspace
+publishes.
+
+What 0.83.0 brings to a rendered page: a `boxes-and-lines` diagram built on a
+busy machine no longer comes out as the layout engine's error text — a crowded
+edge label is now preferred over no picture at all — and `is a cloud` and `is a
+queue` draw a cloud and a queue, where both had been drawing the same rounded
+rectangle as a node with no shape override at all.
+
+Also in this release: the test fixtures install and run from a fresh clone
+again, and each one is pinned to the version its own manifest declares. Nothing
+the package ships changed.
+
 ## 0.7.4
 
 **Diagrams were blank in dark mode on a Tailwind v4 site.** A dual-render fence
