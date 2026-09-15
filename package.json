@@ -65,7 +65,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepublishOnly": "pnpm build && pnpm test"
+    "prepublishOnly": "pnpm build && pnpm test",
+    "prepare": "git config core.hooksPath .githooks 2>/dev/null || true"
   },
   "peerDependencies": {
     "@diagrammo/dgmo": ">=0.77.0 <1",
