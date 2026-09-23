@@ -25,7 +25,7 @@ Both halves must share **one** cache instance — that is what `createDgmoParts(
 
 ## Dependency ranges — keep the two in step
 
-`@diagrammo/dgmo` is declared **both** as a runtime dependency and as a peer (both `>=0.60.0 <1`), and `remark-dgmo` is `^0.14.0` — all three moved together on 2026-08-04, because remark-dgmo 0.14.0 imports `@diagrammo/dgmo/live-link-resolve`, a subpath that first exists in dgmo 0.60.0. They have to stay in step: raising one alone re-creates the bug below. Aligned earlier the same day in `989bc05`: the peer range had promised `>=0.45.0` while the runtime dependency pulled 0.56 regardless, and nothing checks a peer range against your own dependencies. A third declaration as a devDependency was deleted rather than aligned — pnpm ignores a devDependency for a package already listed as a runtime dependency, so it never reached the lockfile and could not flag the drift for six minors. tsup marks dgmo, remark-dgmo, vite, vitepress and markdown-it external.
+`@diagrammo/dgmo` is declared **both** as a runtime dependency and as a peer, and `remark-dgmo` is an open `>=X <1` range. The dgmo floor never sits below the dgmo subpaths remark-dgmo imports, and the runtime and peer ranges move together — nothing checks a peer range against your own dependencies, so a peer that promises less than the runtime dependency pulls is a silent lie. Never add a third declaration as a devDependency: pnpm ignores it for a package already listed as a runtime dependency. tsup marks dgmo, remark-dgmo, vite, vitepress and markdown-it external.
 
 ## Commands
 
