@@ -5,6 +5,10 @@ export default defineConfig({
     environment: 'node',
     globals: false,
     include: ['tests/**/*.test.ts'],
+    // The real-render tests load dgmo + its fonts on first use; on a shared gate
+    // machine that alone has passed vitest's 5s default. This bounds a hang, it
+    // does not measure speed — same headroom astro-dgmo uses.
+    testTimeout: 20000,
     coverage: {
       provider: 'v8',
       include: ['src/**'],
