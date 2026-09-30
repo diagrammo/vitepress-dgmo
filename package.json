@@ -73,8 +73,8 @@
     "vitepress": "^1.0.0"
   },
   "dependencies": {
-    "@diagrammo/dgmo": ">=0.86.0 <1",
-    "remark-dgmo": ">=0.16.0 <1"
+    "@diagrammo/dgmo": ">=0.87.0 <1",
+    "remark-dgmo": ">=0.16.1 <1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
