@@ -67,9 +67,28 @@ export default {
 
 Through 0.6.x that import was a line you had to add here by hand — and a site that skipped it rendered every diagram **twice**, light and dark stacked, with a green build and nothing said anywhere (issue 507). Opt out with `withDgmo(config, { injectClientCss: false })` if you ship your own copy of the color-mode rules; importing it yourself as well is harmless, since Vite resolves both to one module.
 
-### 3. (Optional) re-draw live links that have moved
+### 3. <img src="https://diagrammo.app/icons/live-link.svg" width="20" height="20" alt=""> (Optional) re-draw live links that have moved
 
-A fence can name a published [Diagrammo Cloud](https://diagrammo.app) diagram instead of carrying its own source (`live-link dgm_01HQ3RSTUV`). If that diagram changes after your last build, the page **notices** by default: readers get a small link to the current version. Re-drawing it in the browser instead means shipping the renderer, so it takes two steps that are really one decision.
+A **live link** is a diagram somebody shows on the web from the [Diagrammo app](https://diagrammo.app). The app marks it with an amber globe <img src="https://diagrammo.app/icons/live-link.svg" width="14" height="14" alt="amber globe">. Put its link in a fence and your page draws the diagram as its author last saved it — each time your site builds.
+
+**Get the link in the app** — either route copies it to your clipboard:
+
+- Open the diagram and press **Share** on the left rail (or **⌘E** / **Ctrl+E**), then **Show on the web** in the **Live link** row.
+- Or right-click the diagram in the file list and choose **Show and copy link**.
+
+To copy it again later, open the diagram and press the lit amber globe on the left rail.
+
+**Paste it into a `dgmo` fence**, on a line of its own:
+
+````md
+```dgmo
+https://online.diagrammo.app/d/dgm_01M3PG3DQ6S89W7ZFM5Z06J1CD
+```
+````
+
+Once you know the id, `live-link dgm_01M3PG3DQ6S89W7ZFM5Z06J1CD` inside the fence does the same job.
+
+If that diagram changes after your last build, the page **notices** by default: readers get a small link to the current version. Re-drawing it in the browser instead means shipping the renderer, so it takes two steps that are really one decision.
 
 ```ts
 // .vitepress/config.ts
