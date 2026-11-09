@@ -7,7 +7,10 @@ import { describe, expect, it } from 'vitest';
 // (diagrammo/diagrammo#1781). Compromised npm versions have stayed live past a
 // day, so the one-day hold this replaced left part of that window open.
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const workspace = readFileSync(resolve(__dirname, '..', 'pnpm-workspace.yaml'), 'utf8');
+const workspace = readFileSync(
+  resolve(__dirname, '..', 'pnpm-workspace.yaml'),
+  'utf8'
+);
 
 describe('pnpm release-age hold', () => {
   it('holds new versions for at least three days', () => {
